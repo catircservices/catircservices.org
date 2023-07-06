@@ -1,0 +1,26 @@
+server_name = "catircservices.org"
+admin_email = "whitequark@whitequark.org"
+
+[net.ipv6]
+address = "2a01:4f8:c012:5b7::1"
+gateway = "fe80::1"
+
+[net.ipv4]
+address = "5.75.226.159"
+gateway = "172.31.1.1"
+
+[dns]
+servers = ["2620:fe::fe", "9.9.9.9"]
+
+[ssh]
+pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC3Cn89kCKoRHtTt9ailswSbnO/PeqA70HUcbhzL3mml"
+
+[web]
+banner = "<title>catircservices.org</title><h1>Catherine's IRC Services</h1><p>This server hosts a private bridge between Matrix and IRC.<p>The administrator of this server can be reached at <a href='mailto:whitequark@whitequark.org'>whitequark@whitequark.org</a>, <a href='matrix:u/whitequark:matrix.org?action=chat'>@whitequark:matrix.org</a>, or whitequark at <a href='https://libera.chat'>libera.chat</a> IRC."
+
+[matrix]
+registration = false
+
+[irc]
+ipv6_prefix = "2a01:4f8:c012:5b7:0:1::"
+bot_username = "_catircservices"
