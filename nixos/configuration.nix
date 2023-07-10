@@ -170,6 +170,8 @@ in {
           proxyPass = "http://[::1]:8008$request_uri";
           proxyWebsockets = true;
           extraConfig = ''
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header X-Forwarded-Proto $scheme;
             proxy_set_header Host $host;
             proxy_buffering off;
           '';
