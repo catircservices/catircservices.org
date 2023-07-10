@@ -82,6 +82,7 @@ in {
       };
       homeserver = {
         url = "http://[::1]:8008";
+        media_url = "https://${site_config.server_name}";
         domain = site_config.server_name;
         bindPort = 8009;
         bindHostname = "::1";
