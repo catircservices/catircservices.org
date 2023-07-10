@@ -14,7 +14,7 @@ in
         ];
         ipv6.routes = [
           { address = site_config.net.ipv6.gateway; prefixLength = 128; }
-          { address = site_config.irc.ipv6_prefix;  prefixLength = 96; }
+          { address = site_config.irc.ipv6_prefix;  prefixLength = 96; type = "local"; }
         ];
         ipv4.addresses = [
           { address = site_config.net.ipv4.address; prefixLength = 32; }
@@ -24,7 +24,6 @@ in
         ];
       };
     };
-    localCommands = "ip route replace local ${site_config.irc.ipv6_prefix}/96 dev lo";
     defaultGateway6 = { address = site_config.net.ipv6.gateway; interface = "eth0"; };
     defaultGateway = site_config.net.ipv4.gateway;
     nameservers = site_config.dns.servers;
