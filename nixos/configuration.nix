@@ -189,6 +189,30 @@ in {
   };
 
   # Firewall
-  networking.firewall.allowedTCPPorts = [ 80 443 8448 113 ];
-  networking.firewall.allowedUDPPorts = [ 80 443 8448 113 ];
+  networking.firewall = {
+    allowedTCPPorts = [ 80 443 8448 113 ];
+    allowedUDPPorts = [ 80 443 8448 113 ];
+  };
+
+  # Backup
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["tarsnap"];
+  services.tarsnap = {
+    enable = true;
+    keyfile = "${pkgs.writeText "tarsnap.key" site_secrets.tarsnap.keyfile}";
+    archives."${site_config.server_name}" = {
+      directories = [
+        "/etc/nixos"
+        "/var/backup"
+        "/var/lib/matrix-synapse"
+        "/var/lib/matrix-appservice-irc"
+      ];
+      # Unclear if these excludes would cause issues restoring or not.
+      # This has been undocumented since 2017 (!), see matrix-org/synapse#2046.
+      # excludes = [
+      #   "/var/lib/matrix-synapse/media_store/url_cache*"
+      #   "/var/lib/matrix-synapse/media_store/*_thumbnail*"
+      #   "/var/lib/matrix-synapse/media_store/remote_*"
+      # ];
+    };
+  };
 }
