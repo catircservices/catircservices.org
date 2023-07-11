@@ -25,7 +25,7 @@ in {
   # Database
   services.postgresql = {
     enable = true;
-    initialScript = pkgs.writeText "synapse-init.sql" ''
+    initialScript = pkgs.writeText "database-init.sql" ''
       CREATE ROLE "matrix-synapse" WITH LOGIN PASSWORD 'synapse';
       CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"
         TEMPLATE template0
