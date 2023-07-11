@@ -92,7 +92,7 @@ in {
           name = "libera.chat";
           port = 6697;
           ssl = true;
-          # sasl = true;
+          sasl = true;
           botConfig = {
             nick = site_config.irc.bot_username;
             username = site_config.irc.bot_username;
