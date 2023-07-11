@@ -90,6 +90,8 @@ in {
       ircService = {
         servers."irc.libera.chat" = {
           name = "libera.chat";
+          additionalAddresses = ["irc.eu.libera.chat"];
+          onlyAdditionalAddresses = true;
           port = 6697;
           ssl = true;
           botConfig = {
