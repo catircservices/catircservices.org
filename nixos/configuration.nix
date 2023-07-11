@@ -40,6 +40,7 @@ in {
   services.postgresqlBackup = {
     enable = true;
     compression = "zstd";
+    databases = ["matrix-synapse" "matrix-appservice-irc"];
   };
 
   # Matrix homeserver
