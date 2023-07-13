@@ -1,8 +1,9 @@
 # [catircservices.org][]
 
-This repository contains a NixOS configuration for deployment of [catircservices.org][] on [Hetzner Cloud](https://hetzner.cloud).
+This repository contains a NixOS configuration for deployment of [catircservices.org][] and [staging.catircservices.org] on [Hetzner Cloud](https://hetzner.cloud).
 
 [catircservices.org]: https://catircservices.org
+[staging.catircservices.org]: https://staging.catircservices.org
 
 ## Services
 

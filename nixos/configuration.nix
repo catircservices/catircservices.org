@@ -20,7 +20,7 @@ in {
 
   # SSH
   services.openssh.enable = true;
-  users.users.root.openssh.authorizedKeys.keys = [ site_config.ssh.pubkey ];
+  users.users.root.openssh.authorizedKeys.keys = site_config.ssh.pubkeys;
 
   # Database
   services.postgresql = {
@@ -40,7 +40,7 @@ in {
 
   # Database backup
   services.postgresqlBackup = {
-    enable = true;
+    enable = site_config.backup.enable;
     compression = "zstd";
     databases = ["matrix-synapse" "matrix-appservice-irc" "grafana"];
   };
@@ -252,7 +252,7 @@ in {
   # Backup
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["tarsnap"];
   services.tarsnap = {
-    enable = true;
+    enable = site_config.backup.enable;
     keyfile = "${pkgs.writeText "tarsnap.key" site_secrets.tarsnap.keyfile}";
     archives."${site_config.server_name}" = {
       directories = [

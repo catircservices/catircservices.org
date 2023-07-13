@@ -1,0 +1,43 @@
+server_name = "staging.catircservices.org"
+admin_email = "admin@catircservices.org"
+
+[net.ipv6]
+address = "2a01:4f8:c012:907c::1"
+gateway = "fe80::1"
+
+[net.ipv4]
+address = "128.140.91.194"
+gateway = "172.31.1.1"
+
+[dns]
+servers = ["2620:fe::fe", "9.9.9.9"]
+
+[ssh]
+pubkeys = [
+  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC3Cn89kCKoRHtTt9ailswSbnO/PeqA70HUcbhzL3mml whitequark",
+  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8MUpzP9HB8xgDRZNPTCEZjSP9ntwn7GFyMbsmKrOQM puckipedia"
+]
+
+[web]
+banner = """
+<title>staging.catircservices.org</title>
+<h1>Catherine's IRC Services (Staging)</h1>
+<p>This server is a staging environment for <a href="https://catircservices.org">catircservices.org</a>.</p>
+"""
+
+[matrix]
+registration = false
+
+[irc]
+ipv6_prefix = "2a01:4f8:c012:907c:0:1::"
+bot_username = "_catircstaging"
+bot_nickname = "_catircstaging"
+
+[irc.rooms."#catircservices-staging"]
+roomIds = ["!EfLWKazQAwfGapdFJP:staging.catircservices.org"]
+
+[metrics]
+enable = false
+
+[backup]
+enable = false
