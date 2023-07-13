@@ -129,6 +129,13 @@ in {
             allowNickChanges = true;
             maxClients = 0;
             ipv6.prefix = site_config.irc.ipv6_prefix;
+            # We only bridge Matrix channels that are public and/or where chanops have explicitly
+            # opted into this mode of operation.
+            kickOn = {
+              channelJoinFailure = false;
+              ircConnectionFailure = false;
+              userQuit = false;
+            };
           };
         };
         ident.enabled = true;
