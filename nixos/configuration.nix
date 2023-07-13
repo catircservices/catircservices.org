@@ -208,7 +208,7 @@ in {
         # HTML banner at the root
         locations."=/".extraConfig = "
           default_type text/html;
-          return 200 \"${site_config.web.banner}\";
+          return 200 \"${builtins.replaceStrings ["\n" "\""] ["\\n" "\\\""] site_config.web.banner}\";
         ";
 
         # Matrix homeserver proxy
