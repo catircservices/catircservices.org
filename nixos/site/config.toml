@@ -16,7 +16,12 @@ servers = ["2620:fe::fe", "9.9.9.9"]
 pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC3Cn89kCKoRHtTt9ailswSbnO/PeqA70HUcbhzL3mml"
 
 [web]
-banner = "<title>catircservices.org</title><h1>Catherine's IRC Services</h1><p>This server hosts a private bridge between Matrix and IRC.<p>The administrator of this server can be reached at <a href='mailto:whitequark@whitequark.org'>whitequark@whitequark.org</a>, <a href='matrix:u/whitequark:matrix.org?action=chat'>@whitequark:matrix.org</a>, or whitequark at <a href='https://libera.chat'>libera.chat</a> IRC."
+banner = """
+<title>catircservices.org</title>
+<h1>Catherine's IRC Services</h1>
+<p>This server hosts a private bridge between Matrix and IRC.
+<p>The administrator of this server is Catherine "whitequark". Please email <a href="mailto:admin@catircservices.org">admin@catircservices.org</a> if you have an inquiry related to this server or its services.
+"""
 
 [matrix]
 registration = false
