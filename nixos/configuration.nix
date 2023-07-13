@@ -31,8 +31,10 @@ in {
         TEMPLATE template0
         LC_COLLATE = "C"
         LC_CTYPE = "C";
-      CREATE ROLE "matrix-appservice-irc" WITH LOGIN PASSWORD 'appservice-irc';
+      CREATE ROLE "matrix-appservice-irc" WITH LOGIN PASSWORD 'irc';
       CREATE DATABASE "matrix-appservice-irc" WITH OWNER "matrix-appservice-irc";
+      CREATE ROLE "grafana" WITH LOGIN PASSWORD 'grafana';
+      CREATE DATABASE "grafana" WITH OWNER "grafana";
     '';
   };
 
@@ -79,7 +81,7 @@ in {
     settings = {
       database = {
         engine = "postgres";
-        connectionString = "postgres://matrix-appservice-irc:appservice-irc@localhost/matrix-appservice-irc";
+        connectionString = "postgres://matrix-appservice-irc:irc@localhost/matrix-appservice-irc";
       };
       homeserver = {
         url = "http://[::1]:8008";
@@ -157,6 +159,12 @@ in {
   services.grafana = {
     enable = site_config.metrics.enable;
     settings = {
+      database = {
+        type = "postgres";
+        host = "localhost";
+        user = "grafana";
+        password = "grafana";
+      };
       server = {
         http_addr = "::1";
         http_port = 9000;
