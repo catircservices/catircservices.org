@@ -211,6 +211,7 @@ in {
         # HTML banner at the root
         locations."=/".extraConfig = "
           default_type text/html;
+          charset utf-8;
           return 200 \"${builtins.replaceStrings ["\n" "\""] ["\\n" "\\\""] site_config.web.banner}\";
         ";
 
