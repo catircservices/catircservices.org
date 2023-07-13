@@ -98,7 +98,7 @@ in {
           port = 6697;
           ssl = true;
           botConfig = {
-            nick = site_config.irc.bot_username;
+            nick = site_config.irc.bot_nickname;
             username = site_config.irc.bot_username;
             password = site_secrets.irc.bot_password;
           };
