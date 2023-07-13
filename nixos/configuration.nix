@@ -120,7 +120,7 @@ in {
               idleForHours = 24*7;
             };
           };
-          mappings = site_secrets.irc.rooms;
+          mappings = lib.mkMerge [site_config.irc.rooms site_secrets.irc.rooms];
           matrixClients = {
             userTemplate = "@libera_$NICK";
           };
