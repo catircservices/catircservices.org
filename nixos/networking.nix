@@ -1,6 +1,6 @@
 { lib, ... }:
 let
-  site_config = lib.importTOML ./site/config.toml;
+  site_config = lib.importTOML ./site-${builtins.getEnv "ENVIRONMENT"}/config.toml;
 in
 {
   networking = {
