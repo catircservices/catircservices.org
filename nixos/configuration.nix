@@ -167,7 +167,7 @@ in {
 
         # HTML banner at the root
         locations."=/".extraConfig = "
-          add_header Content-Type text/html;
+          default_type text/html;
           return 200 \"${site_config.web.banner}\";
         ";
 
