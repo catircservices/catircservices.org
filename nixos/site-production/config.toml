@@ -50,6 +50,9 @@ roomIds = ["!pYVedTwEYiMdCdysAu:catircservices.org"]
 [irc.rooms."#glasgow"]
 roomIds = ["!EDwUemPmPNSHXcaynd:catircservices.org"]
 
+[irc.rooms."#riscv"]
+roomIds = ["!TPJQRaBauCaUVymfox:catircservices.org"]
+
 [metrics]
 enable = true
 
