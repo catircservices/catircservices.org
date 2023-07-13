@@ -26,7 +26,7 @@ banner = """
   <dt>Matrix↭IRC double puppeting bridge</dt>
   <dd>
     This bridge is present in IRC channels under the <tt>_catircservices</tt> nickname.
-    Real-time metrics are <a href="/metrics/d/matrix-appservice-irc/">available</a>.
+    Real-time metrics are <a href="/metrics/public-dashboards/dacd39605d844c9f91f3772b84b36837">available</a>.
   </dd>
 </dl>
 """

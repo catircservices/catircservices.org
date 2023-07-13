@@ -170,6 +170,9 @@ in {
         http_port = 9000;
         root_url = "/metrics/";
       };
+      feature_toggles = {
+        enable = "publicDashboards";
+      };
     };
   };
 
