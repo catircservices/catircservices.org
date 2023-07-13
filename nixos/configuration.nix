@@ -129,6 +129,38 @@ in {
           };
         };
         ident.enabled = true;
+        metrics.enabled = site_config.metrics.enable;
+      };
+    };
+  };
+
+  # Prometheus
+  services.prometheus = {
+    enable = site_config.metrics.enable;
+    listenAddress = "[::1]";
+    port = 9090;
+    scrapeConfigs = [
+      {
+        job_name = "matrix-appservice-irc";
+        scrape_interval = "15s";
+        scrape_timeout = "15s";
+        metrics_path = "/metrics";
+        scheme = "http";
+        static_configs = [
+          { targets = ["[::1]:8009"]; }
+        ];
+      }
+    ];
+  };
+
+  # Grafana
+  services.grafana = {
+    enable = site_config.metrics.enable;
+    settings = {
+      server = {
+        http_addr = "::1";
+        http_port = 9000;
+        root_url = "/metrics/";
       };
     };
   };
@@ -184,6 +216,16 @@ in {
           '';
         };
 
+        # Grafana matrics
+        locations."/metrics/" = {
+          proxyPass = "http://[::1]:9000/";
+          proxyWebsockets = true;
+          extraConfig = ''
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_buffering off;
+          '';
+        };
       };
     };
   };
