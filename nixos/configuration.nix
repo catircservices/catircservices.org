@@ -127,6 +127,7 @@ in {
           ircClients = {
             nickTemplate = "$DISPLAY[m]";
             allowNickChanges = true;
+            maxClients = 0;
             ipv6.prefix = site_config.irc.ipv6_prefix;
           };
         };
