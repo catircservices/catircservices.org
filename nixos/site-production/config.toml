@@ -25,6 +25,10 @@ banner = """
 <p>Please email <a href="mailto:admin@catircservices.org">admin@catircservices.org</a> if you have an inquiry related to this server or its services. The administrator of this server is Catherine "whitequark".</p>
 <p>This server hosts the following services:</p>
 <dl>
+  <dt>Matrix homeserver</dt>
+  <dd>
+    This homeserver is deployed to support the IRC bridge.
+  </dd>
   <dt>Matrix↭IRC double puppeting bridge</dt>
   <dd>
     This bridge is present in IRC channels under the <tt>_catircservices</tt> nickname.
