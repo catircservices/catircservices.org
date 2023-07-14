@@ -37,7 +37,7 @@ bot_nickname = "_catircstaging"
 roomIds = ["!EfLWKazQAwfGapdFJP:staging.catircservices.org"]
 
 [metrics]
-enable = false
+enable = true
 
 [backup]
 enable = false
