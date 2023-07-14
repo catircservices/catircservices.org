@@ -27,11 +27,11 @@ banner = """
 <dl>
   <dt>Matrix homeserver</dt>
   <dd>
-    This homeserver is deployed to support the IRC bridge.
+    The homeserver is deployed solely to support the IRC bridge.
   </dd>
   <dt>Matrix↭IRC double puppeting bridge</dt>
   <dd>
-    This bridge is present in IRC channels under the <tt>_catircservices</tt> nickname.
+    The bridge is present in certain <a href="https://libera.chat">libera.chat</a> IRC channels under the <tt>_catircservices</tt> nickname.
     Real-time metrics are <a href="/metrics/public-dashboards/dacd39605d844c9f91f3772b84b36837">available</a>.
   </dd>
 </dl>
