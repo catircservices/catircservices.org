@@ -233,11 +233,9 @@ groups:
   # TLS certificates
   security.acme = {
     acceptTerms = true;
-    defaults = { email = site_config.admin_email; };
+    defaults = { email = site_config.web.acme_email; };
   };
-  users.users.nginx.extraGroups = [
-    "acme"
-  ];
+  users.users.nginx.extraGroups = ["acme"];
 
   # Web reverse proxy server
   services.nginx = {

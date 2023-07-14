@@ -1,5 +1,4 @@
 server_name = "catircservices.org"
-admin_email = "admin@catircservices.org"
 
 [net.ipv6]
 address = "2a01:4f8:c012:5b7::1"
@@ -18,6 +17,7 @@ pubkeys = [
 ]
 
 [web]
+acme_email = "admin@catircservices.org"
 banner = """
 <title>catircservices.org</title>
 <style>dt { font-weight: bold; }</style>
