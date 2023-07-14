@@ -50,20 +50,33 @@ in {
     enable = true;
     settings = {
       server_name = site_config.server_name;
-      listeners = [{
-        port = 8008;
-        bind_addresses = ["::1"];
-        type = "http";
-        tls = false;
-        x_forwarded = true;
-        resources = [{
-          names = ["client" "federation"];
-          compress = true;
-        }];
-      }];
+      listeners = [
+        {
+          port = 8008;
+          bind_addresses = ["::1"];
+          type = "http";
+          tls = false;
+          x_forwarded = true;
+          resources = [{
+            names = ["client" "federation"];
+            compress = true;
+          }];
+        }
+        {
+          port = 8018;
+          bind_addresses = ["::1"];
+          type = "http";
+          tls = false;
+          resources = [{
+            names = ["metrics"];
+            compress = true;
+          }];
+        }
+      ];
       app_service_config_files = [
         "/var/lib/matrix-appservice-irc/registration.yml"
       ];
+      enable_metrics = site_config.metrics.enable;
       enable_registration = site_config.matrix.registration;
       enable_registration_without_verification = site_config.matrix.registration;
     };
@@ -151,6 +164,16 @@ in {
     port = 9090;
     scrapeConfigs = [
       {
+        job_name = "matrix-synapse";
+        scrape_interval = "15s";
+        scrape_timeout = "15s";
+        metrics_path = "/_synapse/metrics";
+        scheme = "http";
+        static_configs = [
+          { targets = ["[::1]:8018"]; }
+        ];
+      }
+      {
         job_name = "matrix-appservice-irc";
         scrape_interval = "15s";
         scrape_timeout = "15s";
@@ -161,6 +184,29 @@ in {
         ];
       }
     ];
+    rules = [''
+groups:
+- name: synapse
+  rules:
+  - record: synapse_storage_events_persisted_by_source_type
+    expr: sum without(type, origin_type, origin_entity) (synapse_storage_events_persisted_events_sep_total{origin_type="remote"})
+    labels:
+      type: remote
+  - record: synapse_storage_events_persisted_by_source_type
+    expr: sum without(type, origin_type, origin_entity) (synapse_storage_events_persisted_events_sep_total{origin_entity="*client*",origin_type="local"})
+    labels:
+      type: local
+  - record: synapse_storage_events_persisted_by_source_type
+    expr: sum without(type, origin_type, origin_entity) (synapse_storage_events_persisted_events_sep_total{origin_entity!="*client*",origin_type="local"})
+    labels:
+      type: bridges
+
+  - record: synapse_storage_events_persisted_by_event_type
+    expr: sum without(origin_entity, origin_type) (synapse_storage_events_persisted_events_sep_total)
+
+  - record: synapse_storage_events_persisted_by_origin
+    expr: sum without(type) (synapse_storage_events_persisted_events_sep_total)
+    ''];
   };
 
   # Grafana
