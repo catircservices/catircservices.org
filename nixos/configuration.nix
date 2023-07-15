@@ -102,6 +102,7 @@ in {
         domain = site_config.server_name;
         bindPort = 8009;
         bindHostname = "::1";
+        dropMatrixMessagesAfterSecs = 600; # 10 minutes
       };
       ircService = {
         servers."irc.libera.chat" = {
