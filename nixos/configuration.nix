@@ -170,7 +170,13 @@ in {
         metrics_path = "/_synapse/metrics";
         scheme = "http";
         static_configs = [
-          { targets = ["[::1]:8018"]; }
+          {
+            targets = ["[::1]:8018"];
+            labels = {
+              instance = site_config.server_name;
+              index = "1";
+            };
+          }
         ];
       }
       {
@@ -180,7 +186,12 @@ in {
         metrics_path = "/metrics";
         scheme = "http";
         static_configs = [
-          { targets = ["[::1]:8009"]; }
+          {
+            targets = ["[::1]:8009"];
+            labels = {
+              instance = site_config.server_name;
+            };
+          }
         ];
       }
     ];
