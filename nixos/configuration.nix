@@ -154,6 +154,10 @@ in {
         };
         ident.enabled = true;
         metrics.enabled = site_config.metrics.enable;
+        debugApi = {
+          enabled = true;
+          port = 11100;
+        };
       };
     };
   };
