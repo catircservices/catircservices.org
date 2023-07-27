@@ -33,7 +33,10 @@ ipv6_prefix = "2a01:4f8:c012:907c:0:1::"
 bot_username = "_catircstaging"
 bot_nickname = "_catircstaging"
 
-[irc.rooms."#catircservices-staging"]
+rooms = []
+channels = []
+
+[irc.mappings."#catircservices-staging"]
 roomIds = ["!EfLWKazQAwfGapdFJP:staging.catircservices.org"]
 
 [metrics]

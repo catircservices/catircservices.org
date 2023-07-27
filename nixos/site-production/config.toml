@@ -45,16 +45,19 @@ ipv6_prefix = "2a01:4f8:c012:5b7:0:1::"
 bot_username = "_catircservices"
 bot_nickname = "_catircservices"
 
-[irc.rooms."#prjbureau"]
+rooms = []
+channels = []
+
+[irc.mappings."#prjbureau"]
 roomIds = ["!ksivXUJPtdDUjwEPLU:catircservices.org"]
 
-[irc.rooms."#amaranth-lang"]
+[irc.mappings."#amaranth-lang"]
 roomIds = ["!pYVedTwEYiMdCdysAu:catircservices.org"]
 
-[irc.rooms."#glasgow"]
+[irc.mappings."#glasgow"]
 roomIds = ["!EDwUemPmPNSHXcaynd:catircservices.org"]
 
-[irc.rooms."#riscv"]
+[irc.mappings."#riscv"]
 roomIds = ["!TPJQRaBauCaUVymfox:catircservices.org"]
 
 [metrics]

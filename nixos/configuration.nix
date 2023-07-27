@@ -122,6 +122,7 @@ in {
               ircToMatrix = {
                 initial = true;
                 incremental = true;
+                # See [Note 1].
                 requireMatrixJoined = false;
               };
               matrixToIrc = {
@@ -134,7 +135,9 @@ in {
               idleForHours = 24*7;
             };
           };
-          mappings = lib.mkMerge [site_config.irc.rooms site_secrets.irc.rooms];
+          rooms = (site_config.irc.rooms ++ site_secrets.irc.rooms);
+          channels = (site_config.irc.channels ++ site_secrets.irc.channels);
+          mappings = lib.mkMerge [site_config.irc.mappings site_secrets.irc.mappings];
           matrixClients = {
             userTemplate = "@libera_$NICK";
           };
@@ -143,8 +146,7 @@ in {
             allowNickChanges = true;
             maxClients = 0;
             ipv6.prefix = site_config.irc.ipv6_prefix;
-            # We only bridge Matrix channels that are public and/or where chanops have explicitly
-            # opted into this mode of operation.
+            # See [Note 1].
             kickOn = {
               channelJoinFailure = false;
               ircConnectionFailure = false;
@@ -160,6 +162,9 @@ in {
         };
       };
     };
+    # [Note 1]: We only bridge Matrix channels that are public and/or where chanops have explicitly
+    # opted into the mode in which this bridge is operating, where Matrix users are not
+    # continuously reflected on the IRC side.
   };
 
   # Prometheus
