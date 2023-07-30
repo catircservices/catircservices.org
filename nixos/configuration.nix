@@ -18,6 +18,13 @@ in {
   networking.hostName = builtins.elemAt (builtins.split "\\." site_config.server_name) 0;
   networking.domain = builtins.elemAt (builtins.split "\\." site_config.server_name) 2;
 
+  # Prompt
+  programs.bash.promptInit = ''
+    if [ "$TERM" != "dumb" ]; then
+      PS1="\n\[\033[${site_config.prompt_color}m\][\u@${site_config.server_name}:\w]\\$\[\033[0m\] "
+    fi
+  '';
+
   # SSH
   services.openssh.enable = true;
   users.users.root.openssh.authorizedKeys.keys = site_config.ssh.pubkeys;

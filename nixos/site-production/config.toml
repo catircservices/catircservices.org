@@ -1,4 +1,5 @@
 server_name = "catircservices.org"
+prompt_color = "1;31"
 
 [net.ipv6]
 address = "2a01:4f8:c012:5b7::1"
