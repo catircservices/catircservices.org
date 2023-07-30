@@ -1,7 +1,7 @@
 { pkgs, lib, config, ... }:
 let
-  site_config = lib.importTOML ./site-${builtins.getEnv "ENVIRONMENT"}/config.toml;
-  site_secrets = lib.importTOML ./site-${builtins.getEnv "ENVIRONMENT"}/secrets.toml;
+  site_config = lib.importTOML (./. + "/site-${builtins.getEnv "ENVIRONMENT"}/config.toml");
+  site_secrets = lib.importTOML (./. + "/site-${builtins.getEnv "ENVIRONMENT"}/secrets.toml");
 in {
   system.stateVersion = "23.05";
 
