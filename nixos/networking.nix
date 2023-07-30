@@ -1,10 +1,23 @@
 { lib, ... }:
 let
   site_config = lib.importTOML (./. + "/site-${builtins.getEnv "ENVIRONMENT"}/config.toml");
+  host = let
+    fqdn_parts = builtins.match "([a-z]+)\\.([a-z.]+)" site_config.server_name;
+  in {
+    name = builtins.elemAt fqdn_parts 0;
+    domain = builtins.elemAt fqdn_parts 1;
+  };
 in
 {
   networking = {
+    # Hostname
+    hostName = host.name;
+    domain = host.domain;
+
+    # Services (none required; we use a static networking configuration)
     dhcpcd.enable = false;
+
+    # Network configuration
     usePredictableInterfaceNames = lib.mkForce false;
     interfaces = {
       eth0 = {

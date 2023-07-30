@@ -14,10 +14,6 @@ in {
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
 
-  # Hostname
-  networking.hostName = builtins.elemAt (builtins.split "\\." site_config.server_name) 0;
-  networking.domain = builtins.elemAt (builtins.split "\\." site_config.server_name) 2;
-
   # Prompt
   programs.bash.promptInit = ''
     if [ "$TERM" != "dumb" ]; then
