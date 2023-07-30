@@ -63,6 +63,9 @@ roomIds = ["!TPJQRaBauCaUVymfox:catircservices.org"]
 [irc.mappings."#litex"]
 roomIds = ["!LhJjrGmNCUyJajtYYf:catircservices.org"]
 
+[irc.mappings."#yosys"]
+roomIds = ["!kYDVwycFCZBXLOyaMW:catircservices.org"]
+
 [metrics]
 enable = true
 
