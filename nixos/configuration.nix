@@ -325,6 +325,7 @@ groups:
   services.nginx = {
     enable = true;
     recommendedProxySettings = true;
+    clientMaxBodySize = "25m";
 
     virtualHosts = {
       "${siteConfig.serverName}" = {
