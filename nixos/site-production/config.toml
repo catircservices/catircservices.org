@@ -35,6 +35,10 @@ banner = """
     The bridge is present in certain <a href="https://libera.chat">libera.chat</a> IRC channels under the <tt>_catircservices</tt> nickname.
     Real-time metrics are <a href="/metrics/public-dashboards/dacd39605d844c9f91f3772b84b36837">available</a>.
   </dd>
+  <dt>Matrix↭Discord double puppeting bridge</dt>
+  <dd>
+    The bridge is present in certain <a href="https://libera.chat">libera.chat</a> IRC channels as well through the Matrix bridge, and the Discord users are through-puppeted to IRC. Yes, this is fantastically janky, but it works.
+  </dd>
 </dl>
 """
 
