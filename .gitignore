@@ -1,1 +1,1 @@
-/nixos/site-production/secrets.toml
+/nixos/site-*/secrets.toml

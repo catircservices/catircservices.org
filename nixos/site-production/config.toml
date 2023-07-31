@@ -67,6 +67,11 @@ roomIds = ["!LhJjrGmNCUyJajtYYf:catircservices.org"]
 [irc.mappings."#yosys"]
 roomIds = ["!kYDVwycFCZBXLOyaMW:catircservices.org"]
 
+[discord]
+applicationId = "1135424862811324416"
+selfServiceBridging = false
+adminMxid = "@whitequark:matrix.org"
+
 [metrics]
 enable = true
 

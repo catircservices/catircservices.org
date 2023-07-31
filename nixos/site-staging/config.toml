@@ -40,6 +40,11 @@ channels = []
 [irc.mappings."#catircservices-staging"]
 roomIds = ["!EfLWKazQAwfGapdFJP:staging.catircservices.org"]
 
+[discord]
+applicationId = "1135426125452025937"
+selfServiceBridging = true
+adminMxid = "@whitequark:matrix.org"
+
 [metrics]
 enable = true
 

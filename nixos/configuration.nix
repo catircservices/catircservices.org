@@ -66,7 +66,7 @@ in {
           }];
         }
         {
-          port = 8018;
+          port = 8108;
           bind_addresses = ["::1"];
           type = "http";
           tls = false;
@@ -78,6 +78,7 @@ in {
       ];
       app_service_config_files = [
         "/var/lib/matrix-appservice-irc/registration.yml"
+        "/var/lib/matrix-appservice-discord/discord-registration.yaml"
       ];
       enable_metrics = siteConfig.metrics.enable;
       enable_registration = siteConfig.matrix.registration;
@@ -170,6 +171,50 @@ in {
     # continuously reflected on the IRC side.
   };
 
+  # Matrix Discord appservice
+  services.matrix-appservice-discord = rec {
+    enable = true;
+    port = 8010;
+    url = "http://localhost:8010";
+    settings = {
+      bridge = {
+        domain = siteConfig.serverName;
+        homeserverUrl = "https://${siteConfig.serverName}/";
+        disablePresence = true;
+        disablePortalBridging = true;
+        enableSelfServiceBridging = siteConfig.discord.selfServiceBridging;
+        adminMxid = siteConfig.discord.adminMxid;
+      };
+      ghosts = {
+        nickPattern = ":nick[D]";
+      };
+      auth = {
+        clientID = siteConfig.discord.applicationId;
+        botToken = siteSecrets.discord.botToken;
+        usePrivilegedIntents = true;
+      };
+      metrics = {
+        enable = siteConfig.metrics.enable;
+        port = 8110;
+      };
+    };
+  };
+  # fix some batshit defaults that break the deployment entirely
+  users.groups.matrix-appservice-discord = {};
+  users.users.matrix-appservice-discord = {
+    description = "Service user for the Matrix-Discord bridge";
+    group = "matrix-appservice-discord";
+    isSystemUser = true;
+  };
+  systemd.services.matrix-appservice-discord.serviceConfig = {
+    DynamicUser = lib.mkForce false;
+    User = "matrix-appservice-discord";
+    Group = "matrix-appservice-discord";
+    StateDirectory = "matrix-appservice-discord";
+    StateDirectoryMode = "755";
+    UMask = lib.mkForce "0022";
+  };
+
   # Prometheus
   services.prometheus = {
     enable = siteConfig.metrics.enable;
@@ -184,7 +229,7 @@ in {
         scheme = "http";
         static_configs = [
           {
-            targets = ["[::1]:8018"];
+            targets = ["[::1]:8108"];
             labels = {
               instance = siteConfig.serverName;
               index = "1";
@@ -201,6 +246,21 @@ in {
         static_configs = [
           {
             targets = ["[::1]:8009"];
+            labels = {
+              instance = siteConfig.serverName;
+            };
+          }
+        ];
+      }
+      {
+        job_name = "matrix-appservice-discord";
+        scrape_interval = "15s";
+        scrape_timeout = "15s";
+        metrics_path = "/metrics";
+        scheme = "http";
+        static_configs = [
+          {
+            targets = ["[::1]:8110"];
             labels = {
               instance = siteConfig.serverName;
             };
