@@ -1,7 +1,7 @@
 { pkgs, lib, config, ... }:
 let
-  site_config = lib.importTOML (./. + "/site-${builtins.getEnv "ENVIRONMENT"}/config.toml");
-  site_secrets = lib.importTOML (./. + "/site-${builtins.getEnv "ENVIRONMENT"}/secrets.toml");
+  siteConfig = lib.importTOML (./. + "/site-${builtins.getEnv "ENVIRONMENT"}/config.toml");
+  siteSecrets = lib.importTOML (./. + "/site-${builtins.getEnv "ENVIRONMENT"}/secrets.toml");
 in {
   system.stateVersion = "23.05";
 
@@ -17,13 +17,13 @@ in {
   # Prompt
   programs.bash.promptInit = ''
     if [ "$TERM" != "dumb" ]; then
-      PS1="\n\[\033[${site_config.prompt_color}m\][\u@${site_config.server_name}:\w]\\$\[\033[0m\] "
+      PS1="\n\[\033[${siteConfig.promptColor}m\][\u@${siteConfig.serverName}:\w]\\$\[\033[0m\] "
     fi
   '';
 
   # SSH
   services.openssh.enable = true;
-  users.users.root.openssh.authorizedKeys.keys = site_config.ssh.pubkeys;
+  users.users.root.openssh.authorizedKeys.keys = siteConfig.ssh.pubkeys;
 
   # Database
   services.postgresql = {
@@ -43,7 +43,7 @@ in {
 
   # Database backup
   services.postgresqlBackup = {
-    enable = site_config.backup.enable;
+    enable = siteConfig.backup.enable;
     compression = "zstd";
     databases = ["matrix-synapse" "matrix-appservice-irc" "grafana"];
   };
@@ -52,7 +52,7 @@ in {
   services.matrix-synapse = {
     enable = true;
     settings = {
-      server_name = site_config.server_name;
+      server_name = siteConfig.serverName;
       listeners = [
         {
           port = 8008;
@@ -79,9 +79,9 @@ in {
       app_service_config_files = [
         "/var/lib/matrix-appservice-irc/registration.yml"
       ];
-      enable_metrics = site_config.metrics.enable;
-      enable_registration = site_config.matrix.registration;
-      enable_registration_without_verification = site_config.matrix.registration;
+      enable_metrics = siteConfig.metrics.enable;
+      enable_registration = siteConfig.matrix.registration;
+      enable_registration_without_verification = siteConfig.matrix.registration;
     };
   };
 
@@ -101,8 +101,8 @@ in {
       };
       homeserver = {
         url = "http://[::1]:8008";
-        media_url = "https://${site_config.server_name}";
-        domain = site_config.server_name;
+        media_url = "https://${siteConfig.serverName}";
+        domain = siteConfig.serverName;
         bindPort = 8009;
         bindHostname = "::1";
         dropMatrixMessagesAfterSecs = 600; # 10 minutes
@@ -115,9 +115,9 @@ in {
           port = 6697;
           ssl = true;
           botConfig = {
-            nick = site_config.irc.bot_nickname;
-            username = site_config.irc.bot_username;
-            password = site_secrets.irc.bot_password;
+            nick = siteConfig.irc.botNickname;
+            username = siteConfig.irc.botUsername;
+            password = siteSecrets.irc.botPassword;
           };
           membershipLists = {
             enabled = true;
@@ -138,9 +138,9 @@ in {
               idleForHours = 24*7;
             };
           };
-          rooms = (site_config.irc.rooms ++ site_secrets.irc.rooms);
-          channels = (site_config.irc.channels ++ site_secrets.irc.channels);
-          mappings = lib.mkMerge [site_config.irc.mappings site_secrets.irc.mappings];
+          rooms = (siteConfig.irc.rooms ++ siteSecrets.irc.rooms);
+          channels = (siteConfig.irc.channels ++ siteSecrets.irc.channels);
+          mappings = lib.mkMerge [siteConfig.irc.mappings siteSecrets.irc.mappings];
           matrixClients = {
             userTemplate = "@libera_$NICK";
           };
@@ -148,7 +148,7 @@ in {
             nickTemplate = "$DISPLAY[m]";
             allowNickChanges = true;
             maxClients = 0;
-            ipv6.prefix = site_config.irc.ipv6_prefix;
+            ipv6.prefix = siteConfig.irc.ipv6Prefix;
             # See [Note 1].
             kickOn = {
               channelJoinFailure = false;
@@ -158,7 +158,7 @@ in {
           };
         };
         ident.enabled = true;
-        metrics.enabled = site_config.metrics.enable;
+        metrics.enabled = siteConfig.metrics.enable;
         debugApi = {
           enabled = true;
           port = 11100;
@@ -172,7 +172,7 @@ in {
 
   # Prometheus
   services.prometheus = {
-    enable = site_config.metrics.enable;
+    enable = siteConfig.metrics.enable;
     listenAddress = "[::1]";
     port = 9090;
     scrapeConfigs = [
@@ -186,7 +186,7 @@ in {
           {
             targets = ["[::1]:8018"];
             labels = {
-              instance = site_config.server_name;
+              instance = siteConfig.serverName;
               index = "1";
             };
           }
@@ -202,7 +202,7 @@ in {
           {
             targets = ["[::1]:8009"];
             labels = {
-              instance = site_config.server_name;
+              instance = siteConfig.serverName;
             };
           }
         ];
@@ -235,7 +235,7 @@ groups:
 
   # Grafana
   services.grafana = {
-    enable = site_config.metrics.enable;
+    enable = siteConfig.metrics.enable;
     settings = {
       database = {
         type = "postgres";
@@ -257,7 +257,7 @@ groups:
   # TLS certificates
   security.acme = {
     acceptTerms = true;
-    defaults = { email = site_config.web.acme_email; };
+    defaults = { email = siteConfig.web.acmeEmail; };
   };
   users.users.nginx.extraGroups = ["acme"];
 
@@ -267,7 +267,7 @@ groups:
     recommendedProxySettings = true;
 
     virtualHosts = {
-      "${site_config.server_name}" = {
+      "${siteConfig.serverName}" = {
         listen = [
           {addr = "0.0.0.0"; port =   80; ssl = false;}
           {addr = "[::]";    port =   80; ssl = false;}
@@ -288,7 +288,7 @@ groups:
         locations."=/".extraConfig = "
           default_type text/html;
           charset utf-8;
-          return 200 \"${builtins.replaceStrings ["\n" "\""] ["\\n" "\\\""] site_config.web.banner}\";
+          return 200 \"${builtins.replaceStrings ["\n" "\""] ["\\n" "\\\""] siteConfig.web.banner}\";
         ";
 
         # Matrix homeserver proxy
@@ -327,9 +327,9 @@ groups:
   # Backup
   nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["tarsnap"];
   services.tarsnap = {
-    enable = site_config.backup.enable;
-    keyfile = "${pkgs.writeText "tarsnap.key" site_secrets.tarsnap.keyfile}";
-    archives."${site_config.server_name}" = {
+    enable = siteConfig.backup.enable;
+    keyfile = "${pkgs.writeText "tarsnap.key" siteSecrets.tarsnap.keyfile}";
+    archives."${siteConfig.serverName}" = {
       directories = [
         "/etc/nixos"
         "/var/backup"

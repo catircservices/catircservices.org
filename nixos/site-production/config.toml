@@ -1,5 +1,5 @@
-server_name = "catircservices.org"
-prompt_color = "1;31"
+serverName = "catircservices.org"
+promptColor = "1;31"
 
 [net.ipv6]
 address = "2a01:4f8:c012:5b7::1"
@@ -18,7 +18,7 @@ pubkeys = [
 ]
 
 [web]
-acme_email = "admin@catircservices.org"
+acmeEmail = "admin@catircservices.org"
 banner = """
 <title>catircservices.org</title>
 <style>dt { font-weight: bold; }</style>
@@ -42,9 +42,9 @@ banner = """
 registration = false
 
 [irc]
-ipv6_prefix = "2a01:4f8:c012:5b7:0:1::"
-bot_username = "_catircservices"
-bot_nickname = "_catircservices"
+ipv6Prefix = "2a01:4f8:c012:5b7:0:1::"
+botUsername = "_catircservices"
+botNickname = "_catircservices"
 
 rooms = []
 channels = []
