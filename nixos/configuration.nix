@@ -186,7 +186,7 @@ in {
         adminMxid = siteConfig.discord.adminMxid;
       };
       ghosts = {
-        nickPattern = ":nick[D]";
+        nickPattern = ":nick";
       };
       auth = {
         clientID = siteConfig.discord.applicationId;
