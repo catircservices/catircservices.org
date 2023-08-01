@@ -130,8 +130,9 @@ in {
                 requireMatrixJoined = false;
               };
               matrixToIrc = {
-                initial = true;
-                incremental = true;
+                # We have too many (idle) users on the Matrix side to realistically sync.
+                initial = false;
+                incremental = false;
               };
             };
             ignoreIdleUsersOnStartup = {
