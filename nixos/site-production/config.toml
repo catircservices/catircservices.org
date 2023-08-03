@@ -71,6 +71,9 @@ roomIds = ["!LhJjrGmNCUyJajtYYf:catircservices.org"]
 [irc.mappings."#yosys"]
 roomIds = ["!kYDVwycFCZBXLOyaMW:catircservices.org"]
 
+[irc.mappings."#rust-embedded"]
+roomIds = ["!BHcierreUuwCMxVqOf:matrix.org"]
+
 [discord]
 applicationId = "1135424862811324416"
 selfServiceBridging = false
