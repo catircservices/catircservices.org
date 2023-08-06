@@ -9,6 +9,7 @@ This repository contains a NixOS configuration for deployment of [catircservices
 
 - [Matrix Synapse](https://github.com/matrix-org/synapse)
 - [Matrix IRC appservice](https://github.com/matrix-org/matrix-appservice-irc/)
+- [Matrix Discord appservice](https://github.com/matrix-org/matrix-appservice-discord/)
 
 ## License
 
