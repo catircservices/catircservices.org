@@ -184,6 +184,7 @@ in {
         disablePresence = true;
         disablePortalBridging = true;
         enableSelfServiceBridging = siteConfig.discord.selfServiceBridging;
+        disableJoinLeaveNotifications = false;
         adminMxid = siteConfig.discord.adminMxid;
       };
       ghosts = {
