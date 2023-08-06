@@ -86,6 +86,10 @@ in {
     };
   };
 
+  # Ensure CPU/memory metrics work on Synapse
+  # (the Prometheus client reads /proc/stat to prove it can read the metrics)
+  systemd.services.matrix-synapse.serviceConfig.ProcSubset = lib.mkForce "all";
+
   # Matrix IRC appservice
   boot.kernel.sysctl."net.ipv6.ip_nonlocal_bind" = "1";
   services.matrix-appservice-irc = {
