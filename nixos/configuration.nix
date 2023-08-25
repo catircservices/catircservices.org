@@ -406,11 +406,11 @@ groups:
       ];
       # Unclear if these excludes would cause issues restoring or not.
       # This has been undocumented since 2017 (!), see matrix-org/synapse#2046.
-      # excludes = [
+      excludes = [
       #   "/var/lib/matrix-synapse/media_store/url_cache*"
       #   "/var/lib/matrix-synapse/media_store/*_thumbnail*"
-      #   "/var/lib/matrix-synapse/media_store/remote_*"
-      # ];
+        "/var/lib/matrix-synapse/media_store/remote_*"
+      ];
     };
   };
 }
