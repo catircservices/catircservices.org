@@ -22,7 +22,11 @@ in {
   '';
 
   # SSH
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+  };
   users.users.root.openssh.authorizedKeys.keys = siteConfig.ssh.pubkeys;
 
   # Database
