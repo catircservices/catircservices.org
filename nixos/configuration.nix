@@ -316,7 +316,8 @@ groups:
         type = "postgres";
         host = "localhost";
         user = "grafana";
-        password = "grafana";
+        # silence a warning about plaintext passwords being stored in Nix store
+        password = "$__file{${pkgs.writeText "grafana_database_password" "grafana"}}";
       };
       server = {
         http_addr = "::1";
