@@ -11,6 +11,11 @@ in {
     ./networking.nix
   ];
 
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 30d";
+  };
+
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
 
