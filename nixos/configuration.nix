@@ -92,6 +92,7 @@ in {
       enable_metrics = siteConfig.metrics.enable;
       enable_registration = siteConfig.matrix.registration;
       enable_registration_without_verification = siteConfig.matrix.registration;
+      use_appservice_legacy_authorization = true;
     };
   };
 
