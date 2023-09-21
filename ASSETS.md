@@ -14,7 +14,7 @@ The following information assets are required to run https://catircservices.org:
 - Domain name `catircservices.org`
   - Provider: [Gandi](https://gandi.net)
   - Owner: Catherine
-  - Operators: Catherine
+  - Operators: Catherine, Charlotte
   - Link: https://admin.gandi.net/domain/1c9d73d2-a93a-11ed-9269-00163e816020/catircservices.org/overview
   - Additional services provided:
     - DNS zone:
