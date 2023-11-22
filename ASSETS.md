@@ -50,10 +50,10 @@ The following information assets are required to run https://catircservices.org:
 - Discord application `1135424862811324416` (production)
   - Provider: [Discord](https://discord.com)
   - Owner: Catherine
-  - Operators: Catherine
+  - Operators: Catherine, Charlotte
   - Link: https://discord.com/developers/applications/1135424862811324416/information
 - Discord application `1135426125452025937` (staging)
   - Provider: [Discord](https://discord.com)
   - Owner: Catherine
-  - Operators: Catherine
+  - Operators: Catherine, Charlotte
   - Link: https://discord.com/developers/applications/1135426125452025937/information
