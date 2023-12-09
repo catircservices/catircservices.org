@@ -42,7 +42,7 @@ roomIds = ["!EfLWKazQAwfGapdFJP:staging.catircservices.org"]
 
 [discord]
 applicationId = "1135426125452025937"
-selfServiceBridging = true
+selfServiceBridging = false
 adminMxid = "@whitequark:matrix.org"
 
 [metrics]
