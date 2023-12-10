@@ -23,7 +23,7 @@ banner = """
 <title>catircservices.org</title>
 <style>dt { font-weight: bold; }</style>
 <h1>Catherine's IRC Services (Production)</h1>
-<p>Please email <a href="mailto:admin@catircservices.org">admin@catircservices.org</a> if you have an inquiry related to this server or its services. The administrators of this server are <a href="mailto:whitequark@whitequark.org">Catherine</a> and Charlotte.</p>
+<p>Please email <a href="mailto:admin@catircservices.org">admin@catircservices.org</a> if you have an inquiry related to this server or its services. The administrators of this server are <a href="mailto:whitequark@whitequark.org">Catherine</a>.</p>
 <p>This server hosts the following services:</p>
 <dl>
   <dt>Matrix homeserver</dt>
