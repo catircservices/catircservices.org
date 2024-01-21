@@ -77,6 +77,12 @@ roomIds = ["!BHcierreUuwCMxVqOf:matrix.org"]
 [irc.mappings."#yosys-apicula"]
 roomIds = ["!cPhqupaZqTrFyEExXz:matrix.org"]
 
+[irc.mappings."#thunderscope"]
+roomIds = ["!ScvCqEKECSnNDshycu:catircservices.org"]
+
+[irc.mappings."#usb4-and-tbt"]
+roomIds = ["!DyrnUgMVyRxbDWotBR:catircservices.org"]
+
 [discord]
 applicationId = "1135424862811324416"
 selfServiceBridging = false
