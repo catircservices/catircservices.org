@@ -413,6 +413,7 @@ groups:
         "/var/backup"
         "/var/lib/matrix-synapse"
         "/var/lib/matrix-appservice-irc"
+        "/var/lib/matrix-appservice-discord"
       ];
       # Unclear if these excludes would cause issues restoring or not.
       # This has been undocumented since 2017 (!), see matrix-org/synapse#2046.
