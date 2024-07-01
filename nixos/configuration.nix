@@ -321,7 +321,7 @@ groups:
         password = "$__file{${pkgs.writeText "grafana_database_password" "grafana"}}";
       };
       server = {
-        http_addr = "::1";
+        http_addr = "[::1]";
         http_port = 9000;
         root_url = "/metrics/";
       };
