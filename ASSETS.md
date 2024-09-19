@@ -2,7 +2,7 @@
 
 The following information assets are required to run https://catircservices.org:
 
-- Source control repository `whitequark/catircservices.org`
+- Source control repository `catircservices/catircservices.org`
   - Provider: [GitHub](https://github.com)
   - Owner: Catherine
   - Operators: Catherine
