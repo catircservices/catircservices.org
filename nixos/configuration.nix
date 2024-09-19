@@ -2,13 +2,19 @@
 let
   siteConfig = lib.importTOML (./. + "/site-${builtins.getEnv "ENVIRONMENT"}/config.toml");
   siteSecrets = lib.importTOML (./. + "/site-${builtins.getEnv "ENVIRONMENT"}/secrets.toml");
+  unstablePkgs = import <nixos-unstable> { system = pkgs.system; };
 in {
   system.stateVersion = "23.05";
 
   # System
   imports = [
+    <nixos-unstable/nixos/modules/services/matrix/appservice-irc.nix>
     ./hardware-configuration.nix
     ./networking.nix
+  ];
+
+  disabledModules = [
+    "services/matrix/appservice-irc.nix" # using nixos-unstable
   ];
 
   nix.gc = {
@@ -25,6 +31,14 @@ in {
       PS1="\n\[\033[${siteConfig.promptColor}m\][\u@${siteConfig.serverName}:\w]\\$\[\033[0m\] "
     fi
   '';
+
+  # Overlays
+  nixpkgs.overlays = [
+    (final: prev: {
+      # bleh.
+      matrix-appservice-irc = unstablePkgs.matrix-appservice-irc;
+    })
+  ];
 
   # SSH
   services.openssh = {
@@ -172,6 +186,11 @@ in {
               userQuit = false;
             };
           };
+        };
+        mediaProxy = {
+          bindPort = 8007;
+          publicUrl = "https://${siteConfig.serverName}/_irc/";
+          ttl = 0;
         };
         ident.enabled = true;
         metrics.enabled = siteConfig.metrics.enable;
@@ -377,9 +396,13 @@ groups:
             proxy_set_header X-Forwarded-For $remote_addr;
             proxy_set_header X-Forwarded-Proto $scheme;
             proxy_set_header Host $host;
-            proxy_hide_header Content-Disposition; # matrix-org/synapse#15885
             proxy_buffering off;
           '';
+        };
+
+        # Matrix IRC media proxy
+        locations."/_irc/" = {
+          proxyPass = "http://127.0.0.1:8007/";
         };
 
         # Grafana matrics
