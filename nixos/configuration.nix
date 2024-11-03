@@ -190,7 +190,7 @@ in {
         mediaProxy = {
           bindPort = 8007;
           publicUrl = "https://${siteConfig.serverName}/_irc/";
-          ttl = 0;
+          ttlSeconds = 0;
         };
         ident.enabled = true;
         metrics.enabled = siteConfig.metrics.enable;
