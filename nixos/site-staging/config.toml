@@ -49,4 +49,6 @@ adminMxid = "@whitequark:matrix.org"
 enable = true
 
 [backup]
-enable = false
+enable = true
+restic = true
+tarsnap = false
