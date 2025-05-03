@@ -67,7 +67,7 @@ in {
   # Database backup
   services.postgresqlBackup = {
     enable = siteConfig.backup.enable;
-    compression = "zstd";
+    compression = "none";
     databases = ["matrix-synapse" "matrix-appservice-irc" "grafana"];
   };
 
@@ -437,13 +437,6 @@ groups:
         "/var/lib/matrix-synapse"
         "/var/lib/matrix-appservice-irc"
         "/var/lib/matrix-appservice-discord"
-      ];
-      # Unclear if these excludes would cause issues restoring or not.
-      # This has been undocumented since 2017 (!), see matrix-org/synapse#2046.
-      excludes = [
-      #   "/var/lib/matrix-synapse/media_store/url_cache*"
-      #   "/var/lib/matrix-synapse/media_store/*_thumbnail*"
-        "/var/lib/matrix-synapse/media_store/remote_*"
       ];
     };
   };
