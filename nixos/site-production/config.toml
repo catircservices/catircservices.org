@@ -87,6 +87,9 @@ roomIds = ["!DyrnUgMVyRxbDWotBR:catircservices.org"]
 [irc.mappings."##bash-crimes"]
 roomIds = ["!PWboRhPPCtGvnrUubS:catircservices.org"]
 
+[irc.mappings."#prjunnamed"]
+roomIds = ["!ajlFAldmcSvFOxlPSL:matrix.org"]
+
 [irc.mappings."#prjcombine"]
 roomIds = ["!qCVLehZMrMXthbZnoP:catircservices.org"]
 
