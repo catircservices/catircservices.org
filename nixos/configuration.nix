@@ -192,6 +192,11 @@ in {
           publicUrl = "https://${siteConfig.serverName}/_irc/";
           ttlSeconds = 0;
         };
+        perRoomConfig = {
+          enabled = true;
+          lineLimitMax = 12;
+          allowUnconnectedMatrixUsers = false; # don't allow overwriting allowUnconnectedMatrixUsers 
+        }
         ident.enabled = true;
         metrics.enabled = siteConfig.metrics.enable;
         debugApi = {
