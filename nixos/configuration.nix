@@ -148,13 +148,6 @@ in {
             username = siteConfig.irc.botUsername;
             password = siteSecrets.irc.botPassword;
           };
-          matrixHandler = {
-            shortReplyTemplate = "$NICK: $REPLY";
-            longReplyTemplate = " <$NICK> $ORIGINAL\n$REPLY";
-            # the typo is intentional
-            shortReplyTresholdSeconds = 400;
-            replySourceMaxLength = 300;
-          };
           membershipLists = {
             enabled = true;
             global = {
@@ -193,6 +186,13 @@ in {
               userQuit = false;
             };
           };
+        };
+        matrixHandler = {
+          shortReplyTemplate = "$NICK: $REPLY";
+          longReplyTemplate = "<$NICK> $ORIGINAL\n$REPLY";
+          # the typo is intentional
+          shortReplyTresholdSeconds = 400;
+          replySourceMaxLength = 300;
         };
         mediaProxy = {
           bindPort = 8007;
