@@ -203,7 +203,7 @@ in {
           enabled = true;
           lineLimitMax = 12;
           allowUnconnectedMatrixUsers = false; # don't allow overwriting allowUnconnectedMatrixUsers 
-        }
+        };
         ident.enabled = true;
         metrics.enabled = siteConfig.metrics.enable;
         debugApi = {
