@@ -16,6 +16,7 @@ servers = ["2620:fe::fe", "9.9.9.9"]
 pubkeys = [
   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC3Cn89kCKoRHtTt9ailswSbnO/PeqA70HUcbhzL3mml whitequark",
   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILF88y4TW1zG+36pPC48tNtHiMSWUBHM0X4aRwZApPoC bin",
+  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID4TzhUMgw3rtLQCnEnaSg/nsfWUunz+TD5fv+N/HrNv fun@carousel",
 ]
 
 [web]
