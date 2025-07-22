@@ -202,7 +202,7 @@ in {
         perRoomConfig = {
           enabled = true;
           lineLimitMax = 12;
-          allowUnconnectedMatrixUsers = false; # don't allow overwriting allowUnconnectedMatrixUsers 
+          allowUnconnectedMatrixUsers = false; # don't allow overwriting allowUnconnectedMatrixUsers
         };
         ident.enabled = true;
         metrics.enabled = siteConfig.metrics.enable;
@@ -445,21 +445,6 @@ groups:
       environmentFile = "${pkgs.writeText "environment" siteSecrets.restic.environment}";
       initialize = true;
       paths = [
-        "/etc/nixos"
-        "/var/backup"
-        "/var/lib/matrix-synapse"
-        "/var/lib/matrix-appservice-irc"
-        "/var/lib/matrix-appservice-discord"
-      ];
-    };
-  };
-
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["tarsnap"];
-  services.tarsnap = {
-    enable = siteConfig.backup.tarsnap;
-    keyfile = "${pkgs.writeText "tarsnap.key" siteSecrets.tarsnap.keyfile}";
-    archives."${siteConfig.serverName}" = {
-      directories = [
         "/etc/nixos"
         "/var/backup"
         "/var/lib/matrix-synapse"

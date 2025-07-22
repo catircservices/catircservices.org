@@ -52,4 +52,3 @@ enable = true
 [backup]
 enable = true
 restic = true
-tarsnap = false
