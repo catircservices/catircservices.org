@@ -52,3 +52,6 @@ enable = true
 [backup]
 enable = true
 restic = true
+
+[notifico]
+enable = false

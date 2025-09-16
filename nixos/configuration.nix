@@ -3,12 +3,15 @@ let
   siteConfig = lib.importTOML (./. + "/site-${builtins.getEnv "ENVIRONMENT"}/config.toml");
   siteSecrets = lib.importTOML (./. + "/site-${builtins.getEnv "ENVIRONMENT"}/secrets.toml");
   unstablePkgs = import <nixos-unstable> { system = pkgs.system; };
+
+  notifico = pkgs.callPackage ./pkgs/notifico { };
 in {
   system.stateVersion = "23.05";
 
   # System
   imports = [
     <nixos-unstable/nixos/modules/services/matrix/appservice-irc.nix>
+    ./modules/notifico.nix
     ./hardware-configuration.nix
     ./networking.nix
   ];
@@ -32,13 +35,20 @@ in {
     fi
   '';
 
-  # Overlays
-  nixpkgs.overlays = [
-    (final: prev: {
-      # bleh.
-      matrix-appservice-irc = unstablePkgs.matrix-appservice-irc;
-    })
-  ];
+  # Overlays and configuration
+  nixpkgs = {
+    overlays = [
+      (final: prev: {
+        # bleh.
+        matrix-appservice-irc = unstablePkgs.matrix-appservice-irc;
+      })
+    ];
+
+    config.permittedInsecurePackages = [
+      "openssl-1.1.1w"
+      "python-2.7.18.8"
+    ];
+  };
 
   # SSH
   services.openssh = {
@@ -428,6 +438,25 @@ groups:
           '';
         };
       };
+    } // lib.optionalAttrs siteConfig.notifico.enable {
+      "notifico.${siteConfig.serverName}" = {
+        forceSSL = true;
+        enableACME = true;
+
+        locations."/".extraConfig = ''
+          root "${notifico}/lib/python2.7/site-packages/notifico/static";
+
+          try_files $uri @notifico;
+        '';
+
+        locations."@notifico" = {
+          proxyPass = "http://127.0.0.1:8000";
+
+          extraConfig = ''
+            proxy_set_header Host $host;
+          '';
+        };
+      };
     };
   };
 
@@ -452,5 +481,13 @@ groups:
         "/var/lib/matrix-appservice-discord"
       ];
     };
+  };
+
+  # Notifico
+  services.notifico = lib.mkIf siteConfig.notifico.enable {
+    enable = true;
+    package = notifico;
+
+    config = siteSecrets.notifico.config;
   };
 }
