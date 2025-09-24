@@ -2,7 +2,6 @@
 let
   siteConfig = lib.importTOML (./. + "/site-${builtins.getEnv "ENVIRONMENT"}/config.toml");
   siteSecrets = lib.importTOML (./. + "/site-${builtins.getEnv "ENVIRONMENT"}/secrets.toml");
-  unstablePkgs = import <nixos-unstable> { system = pkgs.system; };
 
   notifico = pkgs.callPackage ./pkgs/notifico { };
 in {
@@ -10,20 +9,10 @@ in {
 
   # System
   imports = [
-    <nixos-unstable/nixos/modules/services/matrix/appservice-irc.nix>
     ./modules/notifico.nix
     ./hardware-configuration.nix
     ./networking.nix
   ];
-
-  disabledModules = [
-    "services/matrix/appservice-irc.nix" # using nixos-unstable
-  ];
-
-  nix.gc = {
-    automatic = true;
-    options = "--delete-older-than 30d";
-  };
 
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
@@ -35,19 +24,27 @@ in {
     fi
   '';
 
-  # Overlays and configuration
-  nixpkgs = {
-    overlays = [
-      (final: prev: {
-        # bleh.
-        matrix-appservice-irc = unstablePkgs.matrix-appservice-irc;
-      })
-    ];
+  # Nix overlays and configuration
+  nix = {
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 30d";
+    };
 
+    settings = {
+      experimental-features = "flakes nix-command";
+    };
+  };
+
+  nixpkgs = {
     config.permittedInsecurePackages = [
       "openssl-1.1.1w"
       "python-2.7.18.8"
     ];
+
+    flake.source = (import ./npins).nixos;
+
+    hostPlatform = lib.mkDefault "aarch64-linux";
   };
 
   # SSH
