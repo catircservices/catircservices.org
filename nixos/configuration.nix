@@ -227,6 +227,14 @@ in {
   # Matrix Discord appservice
   services.matrix-appservice-discord = rec {
     enable = true;
+    package = pkgs.matrix-appservice-discord.overrideAttrs (oldAttrs: {
+      patches = (oldAttrs.patches or []) ++ [
+        (pkgs.fetchpatch {
+          url = "https://github.com/luc14n0/matrix-appservice-discord/commit/998620daf468e766c726c9dd8807054929126bd1.patch";
+          hash = "sha256-7iQuUcaNa+WVyYbVSRytDDeqJsg3069iZCYb8D2itnM=";
+        })
+      ];
+    });
     port = 8010;
     url = "http://localhost:8010";
     settings = {
