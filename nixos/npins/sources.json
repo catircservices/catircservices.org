@@ -2,9 +2,9 @@
   "pins": {
     "nixos": {
       "type": "Channel",
-      "name": "nixos-25.05",
-      "url": "https://releases.nixos.org/nixos/25.05/nixos-25.05.810308.d1d883129b19/nixexprs.tar.xz",
-      "hash": "18qzarpfwz9ay4bfjra3i4rgs8l2x0xgbd3m1w97z3rhi7i005nh"
+      "name": "nixos-25.11",
+      "url": "https://releases.nixos.org/nixos/25.11/nixos-25.11.650.8bb5646e0bed/nixexprs.tar.xz",
+      "hash": "0gz9gdfqicq0hzs329xvck3p9k7nwl5warzcr023z4n6442h8f8v"
     }
   },
   "version": 5

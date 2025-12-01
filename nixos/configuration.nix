@@ -39,7 +39,7 @@ in {
   nixpkgs = {
     config.permittedInsecurePackages = [
       "openssl-1.1.1w"
-      "python-2.7.18.8"
+      "python-2.7.18.12"
     ];
 
     flake.source = (import ./npins).nixos;
@@ -225,7 +225,7 @@ in {
   };
 
   # Matrix Discord appservice
-  services.matrix-appservice-discord = rec {
+  services.matrix-appservice-discord = {
     enable = true;
     package = pkgs.matrix-appservice-discord.overrideAttrs (oldAttrs: {
       patches = (oldAttrs.patches or []) ++ [
