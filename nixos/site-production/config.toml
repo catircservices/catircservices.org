@@ -103,6 +103,9 @@ roomIds = ["!tWVTWrJJnaulSxazjl:catircservices.org"]
 [irc.mappings."#ardour"]
 roomIds = ["!MEbuWaScqeztfJxssW:catircservices.org"]
 
+[irc.mappings."#spacemit"]
+roomIds = ["!dkqpqajtSsoCuEfEKi:catircservices.org"]
+
 [discord]
 applicationId = "1135424862811324416"
 selfServiceBridging = false
